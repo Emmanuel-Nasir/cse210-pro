@@ -16,11 +16,11 @@ class Program
             
             if (guess>magicNumber)
             {
-                Console.Write("You are wrong! your guess is higher");
+                Console.WriteLine("You are wrong! your guess is higher");
             }else if(guess<magicNumber){
-                Console.Write("You are wrong! your guess is lower");
+                Console.WriteLine("You are wrong! your guess is lower");
             }else{
-                Console.Write("You are so lucky, Your guess is correct!");   
+                Console.WriteLine("You are so lucky, Your guess is correct!");   
              }
         }
     }

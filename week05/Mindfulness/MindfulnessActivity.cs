@@ -26,7 +26,12 @@ class MindfulnessActivity{
     public void EndMessage(string name){
         Console.WriteLine("\nYou are doing well!");
         Console.WriteLine($"You have comepleted the {name} Activity for the {_duration} seconds.");
-    
+    }
+    public void SaveLog(string activityName, int duration)
+    {
+        string logEntry = $"{DateTime.Now}: {activityName} Activity - {duration} seconds\n";
+        File.AppendAllText("mindfulness_log.txt",logEntry);
+        Console.WriteLine("\n[✔] Session saved to mindfulness_log.txt");
     }
     public void PauseWithAnimation(int seconds){
         for (int i = seconds; i>0; i--)

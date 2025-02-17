@@ -1,19 +1,16 @@
-public class EternalGoal : Goal
+using System;
+
+class EternalGoal : Goal
 {
-    public EternalGoal(string name, int points) : base(name, points) {}
-    
+    public EternalGoal(string name, int points) : base(name, points) { }
+
     public override void RecordEvent()
     {
-        // No completion, always ongoing
+        Console.WriteLine($"{Name} recorded! You earned {Points} points.");
     }
 
-    public override string GetStatus()
+    public override string GetDetailsString()
     {
-        return "[∞] " + _name;
-    }
-
-    public override string SaveData()
-    {
-        return $"EternalGoal,{_name},{_points}";
+        return $"{Name} (Eternal Goal)";
     }
 }

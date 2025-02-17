@@ -1,40 +1,35 @@
-public class ChecklistGoal : Goal
-{
-    private int _target;
-    private int _current;
-    private int _bonus;
+using System;
 
-    public ChecklistGoal(string name, int points, int target, int bonus) : base(name, points)
+class ChecklistGoal : Goal
+{
+    private int _targetCount;
+    private int _currentCount;
+    private int _bonusPoints;
+
+    public int TargetCount { get => _targetCount; set => _targetCount = value; }
+    public int CurrentCount { get => _currentCount; set => _currentCount = value; }
+    public int BonusPoints { get => _bonusPoints; set => _bonusPoints = value; }
+
+    public ChecklistGoal(string name, int points, int targetCount, int bonusPoints) : base(name, points)
     {
-        _target = target;
-        _current = 0;
-        _bonus = bonus;
+        _targetCount = targetCount;
+        _currentCount = 0;
+        _bonusPoints = bonusPoints;
     }
 
     public override void RecordEvent()
     {
-        if (_current < _target)
+        _currentCount++;
+        Console.WriteLine($"{Name} recorded! You earned {Points} points.");
+        if (_currentCount >= _targetCount)
         {
-            _current++;
-            if (_current == _target)
-            {
-                _isComplete = true;
-            }
+            IsCompleted = true;
+            Console.WriteLine($"Congratulations! You completed {Name} and earned an additional {BonusPoints} points.");
         }
     }
 
-    public override string GetStatus()
+    public override string GetDetailsString()
     {
-        string progressBar = new string('█', _current) + new string('-', _target - _current);
-        return _isComplete ? $"[X] {_name} (Completed)" : $"[ ] {_name} [{progressBar}] ({_current}/{_target})";
+        return $"{(IsCompleted ? "[X]" : "[ ]")} {Name} - Completed {CurrentCount}/{TargetCount} times";
     }
-
-    public override string SaveData()
-    {
-        return $"ChecklistGoal,{_name},{_points},{_current},{_target},{_bonus}";
-    }
-
-    public int GetCurrent() => _current;
-    public int GetTarget() => _target;
-    public int GetBonus() => _bonus;
 }

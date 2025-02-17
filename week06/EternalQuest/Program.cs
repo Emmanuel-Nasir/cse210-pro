@@ -1,60 +1,50 @@
+using System;
+
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        GoalManager manager = new GoalManager();
-        string filename = "goals.txt";
-        
+        GoalManager goalManager = new GoalManager();
         while (true)
         {
-            Console.WriteLine("\n🎯 Eternal Quest - Goal Tracker 🎯");
-            Console.WriteLine("1. Add Goal");
+            Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. Record Event");
-            Console.WriteLine("3. Display Goals");
-            Console.WriteLine("4. Save Goals");
-            Console.WriteLine("5. Load Goals");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("3. Display Score");
+            Console.WriteLine("4. Show Goals");
+            Console.WriteLine("5. Save Goals");
+            Console.WriteLine("6. Load Goals");
+            Console.WriteLine("7. Exit");
             Console.Write("Choose an option: ");
-            string choice = Console.ReadLine();
+            string option = Console.ReadLine();
 
-            switch (choice)
+            switch (option)
             {
                 case "1":
-                    Console.Write("Enter goal name: ");
-                    string name = Console.ReadLine();
-                    Console.Write("Enter point value: ");
-                    int points = int.Parse(Console.ReadLine());
-                    Console.Write("Goal Type (1=Simple, 2=Eternal, 3=Checklist): ");
-                    int type = int.Parse(Console.ReadLine());
-                    if (type == 1)
-                        manager.AddGoal(new SimpleGoal(name, points));
-                    else if (type == 2)
-                        manager.AddGoal(new EternalGoal(name, points));
-                    else
-                    {
-                        Console.Write("Enter target count: ");
-                        int target = int.Parse(Console.ReadLine());
-                        Console.Write("Enter bonus points: ");
-                        int bonus = int.Parse(Console.ReadLine());
-                        manager.AddGoal(new ChecklistGoal(name, points, target, bonus));
-                    }
+                    goalManager.CreateNewGoal();
                     break;
                 case "2":
-                    Console.Write("Enter goal name to record: ");
-                    manager.RecordEvent(Console.ReadLine());
+                    goalManager.RecordEvent();
                     break;
                 case "3":
-                    manager.DisplayGoals();
+                    goalManager.DisplayScore();
                     break;
                 case "4":
-                    manager.SaveGoals(filename);
+                    goalManager.ShowGoals();
                     break;
                 case "5":
-                    manager.LoadGoals(filename);
+                    goalManager.SaveGoals();
                     break;
                 case "6":
+                    goalManager.LoadGoals();
+                    break;
+                case "7":
                     return;
+                default:
+                    Console.WriteLine("Invalid option. Try again.");
+                    break;
             }
         }
     }
 }
+
+// Creativity: Added a leveling-up mechanism. Players level up when their score reaches multiples of 1000.

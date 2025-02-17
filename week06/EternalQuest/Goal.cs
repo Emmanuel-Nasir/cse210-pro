@@ -1,21 +1,22 @@
-public abstract class Goal
+using System;
+
+abstract class Goal
 {
-    protected string _name;
-    protected int _points;
-    protected bool _isComplete;
+    private string _name;
+    private int _points;
+    private bool _isCompleted;
+
+    public string Name { get => _name; set => _name = value; }
+    public int Points { get => _points; set => _points = value; }
+    public bool IsCompleted { get => _isCompleted; set => _isCompleted = value; }
+
+    public abstract void RecordEvent();
+    public abstract string GetDetailsString();
 
     public Goal(string name, int points)
     {
         _name = name;
         _points = points;
-        _isComplete = false;
+        _isCompleted = false;
     }
-
-    public abstract void RecordEvent();
-    public abstract string GetStatus();
-    public abstract string SaveData();
-    
-    public string GetName() => _name;
-    public int GetPoints() => _points;
-    public bool IsComplete() => _isComplete;
 }
